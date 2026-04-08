@@ -27,27 +27,36 @@ public:
     }
 
     T front(Node* head) {
+        if (head == nullptr) return nullptr;
         return head->value;
     }
 
     T back(Node* head) {
-        Node* prev = head;
-        while (head != nullptr) {
-            prev = head;
-            head = head->next;
-        }
-        return head->value;
+        if (head==nullptr) return nullptr;
+
+        Node* current = head;
+        while (current->next != nullptr)
+            current = current->next;
+        return current->value;
     }
 
-    void push_front(Node* insert, Node* head) {
+    void push_front(const T& value) {
+        Node* insert = new Node(value);
         insert->next = head;
+        head = insert;
     }
 
-    void push_back(Node* insert, Node* head) {
-        while (head->next != nullptr) {
-            head = head->next;
+    void push_back(const T& value) {
+        Node* insert = new Node(value);
+        if (head == nullptr) {
+            head = insert;
+            return;
         }
-        head->next = insert;
+        Node* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->next = insert;
     }
 
     bool empty() {
@@ -118,4 +127,5 @@ public:
         delete current;
         prev->next = nullptr;
     }
+
 };

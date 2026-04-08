@@ -128,4 +128,29 @@ public:
         prev->next = nullptr;
     }
 
+    T operator[](int index) {
+        for (int i=0; i<=index;i++) {
+            head = head->next;
+        }
+        return head->value;
+    }
+
+    void sort(Node* head) {
+        Node* temp1;
+        Node* temp2;
+
+        if(head != nullptr){
+            temp1 = head->next;
+
+            head->next = nullptr;
+            while(temp1 != nullptr){
+                temp2 = temp1->next;
+                temp1->next = head;
+                head = temp1;
+                temp1 = temp2;
+            }
+        }
+    };
+
+
 };
